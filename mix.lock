@@ -36,7 +36,7 @@
   "postgrex": {:hex, :postgrex, "0.14.2", "6680591bbce28d92f043249205e8b01b36cab9ef2a7911abc43649242e1a3b78", [:mix], [{:connection, "~> 1.0", [hex: :connection, repo: "hexpm", optional: false]}, {:db_connection, "~> 2.0", [hex: :db_connection, repo: "hexpm", optional: false]}, {:decimal, "~> 1.5", [hex: :decimal, repo: "hexpm", optional: false]}, {:jason, "~> 1.0", [hex: :jason, repo: "hexpm", optional: true]}], "hexpm"},
   "ranch": {:hex, :ranch, "1.7.1", "6b1fab51b49196860b733a49c07604465a47bdb78aa10c1c16a3d199f7f8c881", [:rebar3], [], "hexpm"},
   "redix": {:hex, :redix, "0.9.3", "c51d66657018a9b14f3b4496b1ba70ef6a16e8414cd19b34635242ac371beb95", [:mix], [], "hexpm"},
-  "shopify_api": {:git, "https://github.com/pixelunion/elixir-shopifyapi.git", "f89ceeb2a14752653bacfbbe9f6ef87f3294e83d", [tag: "v0.3.1"]},
+  "shopify_api": {:git, "https://github.com/pixelunion/elixir-shopifyapi.git", "bd5c6db2a007c693beb76976455852e6c416068b", [tag: "v0.4.0"]},
   "ssl_verify_fun": {:hex, :ssl_verify_fun, "1.1.4", "f0eafff810d2041e93f915ef59899c923f4568f4585904d010387ed74988e77b", [:make, :mix, :rebar3], [], "hexpm"},
   "telemetry": {:hex, :telemetry, "0.4.0", "8339bee3fa8b91cb84d14c2935f8ecf399ccd87301ad6da6b71c09553834b2ab", [:rebar3], [], "hexpm"},
   "unicode_util_compat": {:hex, :unicode_util_compat, "0.4.1", "d869e4c68901dd9531385bb0c8c40444ebf624e60b6962d95952775cac5e90cd", [:rebar3], [], "hexpm"},
