@@ -40,7 +40,10 @@ config :shopify_api, ShopifyAPI.ShopServer,
   initializer: {ShopifyApp.ShopifyAPI.Initializer, :shop_init, []},
   persistance: {ShopifyApp.ShopifyAPI.Initializer, :shop_persist, []}
 
-config :shopify_api, webhook_filter: {ShopifyApp.WebhookFilter, :process, []}
+config :shopify_api,
+  webhook_filter: {ShopifyApp.WebhookFilter, :process, []},
+  json_library: Jason
+
 config :shopify_api, ShopifyAPI.Webhook, uri: System.get_env("WEBHOOK_URI")
 
 config :exq,
