@@ -11,7 +11,8 @@ defmodule ShopifyApp.Application do
       # Start the Ecto repository
       ShopifyApp.Repo,
       # Start the endpoint when the application starts
-      ShopifyAppWeb.Endpoint
+      ShopifyAppWeb.Endpoint,
+      ShopifyAPI.CacheSupervisor
       # Starts a worker by calling: ShopifyApp.Worker.start_link(arg)
       # {ShopifyApp.Worker, arg},
     ]
