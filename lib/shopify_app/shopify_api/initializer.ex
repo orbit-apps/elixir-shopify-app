@@ -1,14 +1,11 @@
 defmodule ShopifyApp.ShopifyAPI.Initializer do
   require Logger
 
-  alias Ecto.Repo.Registry
   alias ShopifyAPI.App, as: ShopifyAPIApp
   alias ShopifyAPI.Shop, as: ShopifyAPIShop
   alias ShopifyAPI.AuthToken, as: ShopifyAPIAuthToken
   alias ShopifyApp.Shop
   alias ShopifyApp.AuthToken
-
-  @retry_time 500
 
   def app_init do
     [
@@ -24,18 +21,7 @@ defmodule ShopifyApp.ShopifyAPI.Initializer do
     ]
   end
 
-  def shop_init do
-    if repository_started?() do
-      Enum.map(Shop.all(), &to_shopify_shop_struct/1)
-    else
-      Logger.info(
-        "#{__MODULE__} failed to connect to the DB, trying again in #{@retry_time} shop_init"
-      )
-
-      :timer.sleep(@retry_time)
-      __MODULE__.shop_init()
-    end
-  end
+  def shop_init, do: Enum.map(Shop.all(), &to_shopify_shop_struct/1)
 
   def shop_persist(_key, %ShopifyAPIShop{} = shop) do
     shop
@@ -43,18 +29,7 @@ defmodule ShopifyApp.ShopifyAPI.Initializer do
     |> Shop.insert()
   end
 
-  def auth_token_init do
-    if repository_started?() do
-      Enum.map(AuthToken.all(), &to_shopify_token_struct/1)
-    else
-      Logger.info(
-        "#{__MODULE__} failed to connect to the DB, trying again in #{@retry_time} shop_init"
-      )
-
-      :timer.sleep(@retry_time)
-      __MODULE__.auth_token_init()
-    end
-  end
+  def auth_token_init, do: Enum.map(AuthToken.all(), &to_shopify_token_struct/1)
 
   def auth_token_persist(_key, %ShopifyAPIAuthToken{} = token) do
     token
@@ -72,27 +47,5 @@ defmodule ShopifyApp.ShopifyAPI.Initializer do
       timestamp: 0,
       plus: false
     }
-  end
-
-  def repository_started? do
-    pid = GenServer.whereis(ShopifyApp.Repo)
-
-    if is_pid(pid) do
-      try do
-        Registry.lookup(pid)
-        true
-      rescue
-        # This guards against a potential startup race condition where the
-        # Repo may be started but not yet registered with Ecto's Registry.
-        #
-        # Under the hood, Ecto.Repo.Registry/1 uses :ets.lookup_element/3,
-        # which raises ArgumentError if unable to find the requested elem.
-        #
-        # If this is the case, we rescue ArgumentError and return false.
-        ArgumentError -> false
-      end
-    else
-      false
-    end
   end
 end
