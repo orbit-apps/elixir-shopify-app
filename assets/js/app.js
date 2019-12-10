@@ -17,7 +17,12 @@ import "phoenix_html"
 // Local files can be imported directly using relative paths, for example:
 // import socket from "./socket"
 import "@shopify/app-bridge"
+import React from "react";
+import ReactDom from "react-dom";
 
-import greet from "./hello";
+import Main from './main';
 
-document.querySelector("h1").innerHTML = greet("Shopiy App");
+ReactDom.render(
+  <Main name="your new App" />,
+  document.querySelector("main")
+);
