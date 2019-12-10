@@ -1,3 +1,4 @@
+/* eslint-disable */
 // NOTE: The contents of this file will only be executed if
 // you uncomment its entry in "assets/js/app.js".
 
@@ -61,3 +62,4 @@ channel.join()
   .receive("error", resp => { console.log("Unable to join", resp) })
 
 export default socket
+/* eslint-enable */
