@@ -21,5 +21,8 @@
     "uglifyjs-webpack-plugin": "^1.2.4",
     "webpack": "4.4.0",
     "webpack-cli": "^2.0.10"
+  },
+  "engines": {
+     "node": ">= 12.13.1"
   }
 }
