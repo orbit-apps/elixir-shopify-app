@@ -1,7 +1,8 @@
-// We need to import the CSS so that webpack will load it.
+// We need to require the CSS so that Typescript will ignore
+// it when parsing and then webpack will load it.
 // The MiniCssExtractPlugin is used to separate it out into
 // its own CSS file.
-import css from "../css/app.css"
+const _css = require("../css/app.css");
 
 // webpack automatically bundles all modules in your
 // entry points. Those entry points can be configured
@@ -16,3 +17,12 @@ import "phoenix_html"
 // Local files can be imported directly using relative paths, for example:
 // import socket from "./socket"
 import "@shopify/app-bridge"
+import React from "react";
+import ReactDom from "react-dom";
+
+import Main from './main';
+
+ReactDom.render(
+  <Main name="your new App" />,
+  document.querySelector("main")
+);
