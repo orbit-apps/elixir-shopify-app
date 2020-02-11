@@ -10,9 +10,9 @@ defmodule ShopifyApp.ShopifyAPI.Initializer do
   def app_init do
     [
       %ShopifyAPIApp{
-        name: "",
-        client_id: "",
-        client_secret: "",
+        name: "shopify_app",
+        client_id: api_key: System.get_env("API_KEY"),
+        client_secret: System.get_env("API_SECRET"),
         auth_redirect_uri: "",
         nonce: "test",
         scope:

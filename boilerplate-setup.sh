@@ -92,6 +92,10 @@ for path in $paths; do
 done
 success "Done!\n"
 
+header "Updating Shopify initializers"
+run /usr/bin/sed -i "''" "s/$snakeCaseBefore/$snakeCaseAfter/g" lib/$snakeCaseAfter/shopify_api/initializer.ex
+success "Done!\n"
+
 header "Importing project README.md"
 run "rm README.md && mv BOILERPLATE_README.md README.md"
 success "Done!\n"
