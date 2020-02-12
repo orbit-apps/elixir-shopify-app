@@ -1,0 +1,56 @@
+on: push
+name: Continuous Integration
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      db:
+        image: postgres:11
+        ports: ['5432:5432']
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: ""
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      MIX_ENV: test
+
+    strategy:
+      matrix:
+        otp: [22.2]
+        elixir: [1.10.0]
+
+    steps:
+      - uses: actions/checkout@v1.0.0
+
+      - name: Cache dialyzer plts
+        uses: actions/cache@v1
+        with:
+          path: priv/plts
+          key: ${{runner.os}}-${{matrix.otp}}-${{matrix.elixir}}-plts
+
+      - name: Cache deps
+        uses: actions/cache@v1
+        with:
+          path: deps
+          key: ${{hashFiles('mix.lock')}}
+
+      - uses: actions/setup-elixir@v1.0.0
+        with:
+          otp-version: ${{matrix.otp}}
+          elixir-version: ${{matrix.elixir}}
+      - name: Deps get
+        run: mix deps.get
+      - name: Check Credo
+        run: mix credo
+      - name: Check Formatting
+        run: mix format --check-formatted
+      - name: Run Tests
+        run: mix do compile --warnings-as-errors, test
+      - name: Dialyzer
+        run: MIX_ENV=dev mix dialyzer --halt-exit-status
