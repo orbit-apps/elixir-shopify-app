@@ -14,6 +14,7 @@ defmodule ShopifyAppWeb.ConnCase do
   """
 
   use ExUnit.CaseTemplate
+  alias Ecto.Adapters.SQL.Sandbox
 
   using do
     quote do
@@ -27,10 +28,10 @@ defmodule ShopifyAppWeb.ConnCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(ShopifyApp.Repo)
+    :ok = Sandbox.checkout(ShopifyApp.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(ShopifyApp.Repo, {:shared, self()})
+      Sandbox.mode(ShopifyApp.Repo, {:shared, self()})
     end
 
     {:ok, conn: Phoenix.ConnTest.build_conn()}
