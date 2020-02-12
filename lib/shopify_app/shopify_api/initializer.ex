@@ -1,17 +1,11 @@
 defmodule ShopifyApp.ShopifyAPI.Initializer do
   require Logger
 
-  alias ShopifyAPI.App, as: ShopifyAPIApp
-  alias ShopifyAPI.Shop, as: ShopifyAPIShop
-  alias ShopifyAPI.AuthToken, as: ShopifyAPIAuthToken
-  alias ShopifyApp.Shop
-  alias ShopifyApp.AuthToken
-
   def app_init do
     [
-      %ShopifyAPIApp{
+      %ShopifyAPI.App{
         name: "shopify_app",
-        client_id: api_key: System.get_env("API_KEY"),
+        client_id: System.get_env("API_KEY"),
         client_secret: System.get_env("API_SECRET"),
         auth_redirect_uri: "",
         nonce: "test",
@@ -21,26 +15,26 @@ defmodule ShopifyApp.ShopifyAPI.Initializer do
     ]
   end
 
-  def shop_init, do: Enum.map(Shop.all(), &to_shopify_shop_struct/1)
+  def shop_init, do: Enum.map(ShopifyApp.Shop.all(), &to_shopify_shop_struct/1)
 
-  def shop_persist(_key, %ShopifyAPIShop{} = shop) do
+  def shop_persist(_key, %ShopifyAPI.Shop{} = shop) do
     shop
     |> Map.from_struct()
-    |> Shop.insert()
+    |> ShopifyApp.Shop.insert()
   end
 
-  def auth_token_init, do: Enum.map(AuthToken.all(), &to_shopify_token_struct/1)
+  def auth_token_init, do: Enum.map(ShopifyApp.AuthToken.all(), &to_shopify_token_struct/1)
 
-  def auth_token_persist(_key, %ShopifyAPIAuthToken{} = token) do
+  def auth_token_persist(_key, %ShopifyAPI.AuthToken{} = token) do
     token
     |> Map.from_struct()
-    |> AuthToken.insert()
+    |> ShopifyApp.AuthToken.insert()
   end
 
-  defp to_shopify_shop_struct(%{domain: domain}), do: %ShopifyAPIShop{domain: domain}
+  defp to_shopify_shop_struct(%{domain: domain}), do: %ShopifyAPI.Shop{domain: domain}
 
   defp to_shopify_token_struct(%{app_name: app_name, shop_name: shop_name, token: token}) do
-    %ShopifyAPIAuthToken{
+    %ShopifyAPI.AuthToken{
       app_name: app_name,
       shop_name: shop_name,
       token: token,
