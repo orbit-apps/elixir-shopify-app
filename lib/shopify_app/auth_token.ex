@@ -21,8 +21,6 @@ defmodule ShopifyApp.AuthToken do
     |> Repo.insert_or_update()
   end
 
-  def all, do: Repo.all(AuthToken)
-
   @doc false
   def changeset(auth_token, attrs) do
     auth_token
