@@ -40,7 +40,7 @@ defmodule ShopifyApp.MixProject do
     [
       # dev
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:credo, "~> 1.3.0", only: [:dev, :test], runtime: false},
+      {:credo, "~> 1.4.0", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0.0-rc.4", only: :dev, runtime: false},
       # everything else
       {:ecto_sql, "~> 3.0"},
