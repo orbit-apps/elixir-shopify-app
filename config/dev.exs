@@ -69,7 +69,7 @@ config :phoenix, :plug_init_mode, :runtime
 # Configure your database
 config :shopify_app, ShopifyApp.Repo,
   username: "postgres",
-  password: "",
+  password: "postgres",
   database: "shopify_app_dev",
   hostname: "localhost",
   pool_size: 10
