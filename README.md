@@ -1,6 +1,6 @@
 ## Elixir Shopify App
 
-Everyting you need to get [Elixir Shopify API](https://github.com/pixelunion/elixir-shopifyapi) up and running.
+Everything you need to get [Elixir Shopify API](https://github.com/pixelunion/elixir-shopifyapi) up and running.
 
 ## Usage
 
@@ -9,12 +9,13 @@ Everyting you need to get [Elixir Shopify API](https://github.com/pixelunion/eli
 1. Delete the internal Git directory `rm -rf .git`
 1. Run the boilerplate setup script `./boilerplate-setup.sh YourProjectName`
 1. Create a new Git repository `git init`
-1. Create the initial Git commit `git commit -a -m "Initial commit"`
+1. Create the initial Git commit `git add -a`
+1. Create the initial Git commit `git commit -m "Initial commit"`
 1. Setup a Shopify App
-  - Add the api key and secret to you're `.env`
-  - Update the whitelisted urls to include `https://public-facing-url.ngrok.com/shop/authenticed/your_project_name`
+  - Add the API key and secret to your `.env`
+  - Update the allowed URLs to include `https://public-facing-url.ngrok.com/shop/authorized/your_project_name`
 1. Start your database `docker-compose up -d`
-1. Fetch depenancies
+1. Fetch dependencies
   - `mix deps.get`
   - `mix ecto.setup`
   - `cd assets && yarn install && cd ..`
