@@ -9,7 +9,7 @@ Everything you need to get [Elixir Shopify API](https://github.com/pixelunion/el
 1. Delete the internal Git directory `rm -rf .git`
 1. Run the boilerplate setup script `./boilerplate-setup.sh YourProjectName`
 1. Create a new Git repository `git init`
-1. Create the initial Git commit `git add -a`
+1. Create the initial Git commit `git add -A`
 1. Create the initial Git commit `git commit -m "Initial commit"`
 1. Setup a Shopify App
   - Add the API key and secret to your `.env`
