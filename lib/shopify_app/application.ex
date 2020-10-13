@@ -12,7 +12,7 @@ defmodule ShopifyApp.Application do
       ShopifyApp.Repo,
       # Start the endpoint when the application starts
       ShopifyAppWeb.Endpoint,
-      ShopifyAPI.CacheSupervisor
+      ShopifyAPI.Supervisor
       # Starts a worker by calling: ShopifyApp.Worker.start_link(arg)
       # {ShopifyApp.Worker, arg},
     ]
