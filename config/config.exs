@@ -30,15 +30,15 @@ config :phoenix, :json_library, Jason
 ###################
 config :shopify_api, ShopifyAPI.AuthTokenServer,
   initializer: {ShopifyApp.ShopifyAPI.Initializer, :auth_token_init, []},
-  persistance: {ShopifyApp.ShopifyAPI.Initializer, :auth_token_persist, []}
+  persistence: {ShopifyApp.ShopifyAPI.Initializer, :auth_token_persist, []}
 
 config :shopify_api, ShopifyAPI.AppServer,
   initializer: {ShopifyApp.ShopifyAPI.Initializer, :app_init, []},
-  persistance: nil
+  persistence: nil
 
 config :shopify_api, ShopifyAPI.ShopServer,
   initializer: {ShopifyApp.ShopifyAPI.Initializer, :shop_init, []},
-  persistance: {ShopifyApp.ShopifyAPI.Initializer, :shop_persist, []}
+  persistence: {ShopifyApp.ShopifyAPI.Initializer, :shop_persist, []}
 
 config :shopify_api,
   webhook_filter: {ShopifyApp.WebhookFilter, :process, []},
