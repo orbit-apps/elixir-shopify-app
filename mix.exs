@@ -47,13 +47,13 @@ defmodule ShopifyApp.MixProject do
       {:ecto_sql, "~> 3.0"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:phoenix, "~> 1.4.0"},
+      {:phoenix, "~> 1.5"},
       {:phoenix_ecto, "~> 4.0"},
       {:phoenix_html, "~> 2.11"},
-      {:phoenix_pubsub, "~> 1.1"},
+      {:phoenix_pubsub, "~> 2.0"},
       {:plug_cowboy, "~> 2.0"},
       {:postgrex, ">= 0.0.0"},
-      {:shopify_api, github: "pixelunion/elixir-shopifyapi", tag: "v0.11.0"}
+      {:shopify_api, github: "pixelunion/elixir-shopifyapi", tag: "v0.12.0"}
     ]
   end
 
