@@ -6,7 +6,7 @@ jobs:
 
     services:
       db:
-        image: postgres:11
+        image: postgres:12
         ports: ['5432:5432']
         env:
           POSTGRES_USER: postgres
@@ -22,28 +22,23 @@ jobs:
 
     strategy:
       matrix:
-        otp: [22.2]
-        elixir: [1.10.0]
+        otp: [23.2]
+        elixir: [1.11.3]
 
     steps:
-      - uses: actions/checkout@v1.0.0
+      - uses: actions/checkout@v2
 
       - name: Cache dialyzer plts
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: priv/plts
           key: ${{runner.os}}-${{matrix.otp}}-${{matrix.elixir}}-plts
 
-      - name: Cache deps
-        uses: actions/cache@v1
-        with:
-          path: deps
-          key: ${{hashFiles('mix.lock')}}
-
-      - uses: actions/setup-elixir@v1.0.0
+      - uses: erlef/setup-elixir@v1
         with:
           otp-version: ${{matrix.otp}}
           elixir-version: ${{matrix.elixir}}
+
       - name: Deps get
         run: mix deps.get
       - name: Check Credo
@@ -53,4 +48,4 @@ jobs:
       - name: Run Tests
         run: mix do compile --warnings-as-errors, test
       - name: Dialyzer
-        run: MIX_ENV=dev mix dialyzer --halt-exit-status
+        run: mix dialyzer --halt-exit-status

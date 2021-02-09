@@ -1,19 +1,20 @@
 defmodule ShopifyApp.MixProject do
   use Mix.Project
 
+  @version "0.2.0"
+
   def project do
     [
       app: :shopify_app,
-      version: "0.1.0",
-      elixir: "~> 1.5",
+      version: @version,
+      elixir: "~> 1.11",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
       dialyzer: [
-        plt_add_deps: :transitive,
-        plt_add_apps: [:mix],
+        plt_add_apps: [:mix, :ex_unit],
         plt_file: {:no_warn, "priv/plts/dialyzer.plt"}
       ]
     ]
@@ -41,18 +42,18 @@ defmodule ShopifyApp.MixProject do
       # dev
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:credo, "~> 1.5.0", only: [:dev, :test], runtime: false},
-      {:dialyxir, "~> 1.0.0-rc.4", only: :dev, runtime: false},
+      {:dialyxir, "~> 1.0.0", only: [:dev, :test], runtime: false},
       # everything else
       {:ecto_sql, "~> 3.0"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:phoenix, "~> 1.4.0"},
+      {:phoenix, "~> 1.5"},
       {:phoenix_ecto, "~> 4.0"},
       {:phoenix_html, "~> 2.11"},
-      {:phoenix_pubsub, "~> 1.1"},
+      {:phoenix_pubsub, "~> 2.0"},
       {:plug_cowboy, "~> 2.0"},
       {:postgrex, ">= 0.0.0"},
-      {:shopify_api, github: "pixelunion/elixir-shopifyapi", tag: "v0.11.0"}
+      {:shopify_api, github: "pixelunion/elixir-shopifyapi", tag: "v0.12.0"}
     ]
   end
 
