@@ -48,4 +48,4 @@ jobs:
       - name: Run Tests
         run: mix do compile --warnings-as-errors, test
       - name: Dialyzer
-        run: MIX_ENV=dev mix dialyzer --halt-exit-status
+        run: mix dialyzer --halt-exit-status
