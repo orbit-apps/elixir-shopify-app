@@ -1,3 +1,4 @@
-elixir 1.11.3-otp-23
+elixir 1.11.4-otp-23
 erlang 23.2.1
-nodejs 12.13.1
+nodejs 14.16.0
+yarn 1.22.10
