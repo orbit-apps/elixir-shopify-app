@@ -14,8 +14,7 @@ config :shopify_app,
 config :shopify_app, ShopifyAppWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "BaCSN0TeeSORCKa4sfDKXFiA+x68+09JDKQKctDU7UFqDvg3uYS5WEYbyOPG5p28",
-  render_errors: [view: ShopifyAppWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: ShopifyApp.PubSub, adapter: Phoenix.PubSub.PG2]
+  render_errors: [view: ShopifyAppWeb.ErrorView, accepts: ~w(html json)]
 
 # Configures Elixir's Logger
 config :logger, :console,

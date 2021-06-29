@@ -8,6 +8,7 @@ defmodule ShopifyApp.Application do
   def start(_type, _args) do
     # List all child processes to be supervised
     children = [
+      {Phoenix.PubSub, [name: ShopifyApp.PubSub, adapter: Phoenix.PubSub.PG2]},
       # Start the Ecto repository
       ShopifyApp.Repo,
       # Start the endpoint when the application starts
