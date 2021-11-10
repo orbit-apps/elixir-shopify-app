@@ -53,7 +53,7 @@ defmodule ShopifyApp.MixProject do
       {:phoenix_pubsub, "~> 2.0"},
       {:plug_cowboy, "~> 2.0"},
       {:postgrex, ">= 0.0.0"},
-      {:shopify_api, github: "pixelunion/elixir-shopifyapi", tag: "v0.12.4"}
+      {:shopify_api, github: "pixelunion/elixir-shopifyapi", tag: "v0.12.5"}
     ]
   end
 
