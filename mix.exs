@@ -49,7 +49,7 @@ defmodule ShopifyApp.MixProject do
       {:jason, "~> 1.0"},
       {:phoenix, "~> 1.5"},
       {:phoenix_ecto, "~> 4.0"},
-      {:phoenix_html, "~> 2.11"},
+      {:phoenix_html, "~> 3.2"},
       {:phoenix_pubsub, "~> 2.0"},
       {:plug_cowboy, "~> 2.0"},
       {:postgrex, ">= 0.0.0"},
