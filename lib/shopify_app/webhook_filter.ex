@@ -1,4 +1,5 @@
 defmodule ShopifyApp.WebhookFilter do
+  @moduledoc false
   require Logger
 
   def process(%ShopifyAPI.EventPipe.Event{action: "orders/create", object: %{}} = event) do

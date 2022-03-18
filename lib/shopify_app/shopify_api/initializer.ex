@@ -1,4 +1,5 @@
 defmodule ShopifyApp.ShopifyAPI.Initializer do
+  @moduledoc false
   require Logger
 
   def app_init do

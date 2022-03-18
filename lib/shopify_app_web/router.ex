@@ -4,18 +4,14 @@ defmodule ShopifyAppWeb.Router do
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
-    plug :fetch_flash
+    plug :fetch_live_flash
+    plug :put_root_layout, {ShopifyAppWeb.LayoutView, :root}
     plug :protect_from_forgery
-    # This sets X-Frame-Options and that won't work with shopify
-    # plug :put_secure_browser_headers
+    plug :put_secure_browser_headers
   end
 
   pipeline :api do
     plug :accepts, ["json"]
-  end
-
-  pipeline :shop_admin do
-    plug ShopifyAPI.Plugs.AdminAuthenticator
   end
 
   scope "/", ShopifyAppWeb do
@@ -24,18 +20,25 @@ defmodule ShopifyAppWeb.Router do
     get "/", PageController, :index
   end
 
-  scope "/shop", ShopifyAPI do
-    forward("/", Router)
-  end
-
-  scope "/shop-admin/:app", ShopifyAppWeb do
-    pipe_through :browser
-    pipe_through :shop_admin
-    get "/", PageController, :index
-  end
-
   # Other scopes may use custom stacks.
   # scope "/api", ShopifyAppWeb do
   #   pipe_through :api
   # end
+
+  # Enables LiveDashboard only for development
+  #
+  # If you want to use the LiveDashboard in production, you should put
+  # it behind authentication and allow only admins to access it.
+  # If your application does not have an admins-only section yet,
+  # you can use Plug.BasicAuth to set up some basic authentication
+  # as long as you are also using SSL (which you should anyway).
+  if Mix.env() in [:dev, :test] do
+    import Phoenix.LiveDashboard.Router
+
+    scope "/" do
+      pipe_through :browser
+
+      live_dashboard "/dashboard", metrics: ShopifyAppWeb.Telemetry
+    end
+  end
 end
