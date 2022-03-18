@@ -1,35 +1,20 @@
 defmodule ShopifyApp.Shop do
   @moduledoc false
-  use Ecto.Schema
-  import Ecto.Changeset
   alias ShopifyApp.Repo
+  alias ShopifyApp.Schema
 
-  schema "shops" do
-    field :domain, :string
-
-    timestamps()
-  end
-
-  def all, do: Repo.all(__MODULE__)
+  def all, do: Repo.all(Schema.Shop)
 
   def insert(shop) do
     shop
     |> find_or_new()
-    |> changeset(shop)
+    |> Schema.Shop.changeset(shop)
     |> Repo.insert_or_update()
   end
 
-  @doc false
-  def changeset(shop, attrs) do
-    shop
-    |> cast(attrs, [:domain])
-    |> validate_required([:domain])
-  end
-
-  @doc false
-  defp find_or_new(%{domain: domain}) do
-    case Repo.get_by(__MODULE__, domain: domain) do
-      nil -> %__MODULE__{}
+  def find_or_new(%{domain: domain}) do
+    case Repo.get_by(Schema.Shop, domain: domain) do
+      nil -> %Schema.Shop{}
       shop -> shop
     end
   end
