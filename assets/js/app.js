@@ -1,32 +1,45 @@
-/* eslint-disable no-underscore-dangle, @typescript-eslint/no-var-requires, import/order, import/first, import/extensions, max-len, import/no-unresolved, react/jsx-filename-extension
-*/
-/* global document */
+// We import the CSS which is extracted to its own file by esbuild.
+// Remove this line if you add a your own CSS build pipeline (e.g postcss).
+import "../css/app.css"
 
-// We need to require the CSS so that Typescript will ignore
-// it when parsing and then webpack will load it.
-// The MiniCssExtractPlugin is used to separate it out into
-// its own CSS file.
-const _css = require('../css/app.css');
+// If you want to use Phoenix channels, run `mix help phx.gen.channel`
+// to get started and then uncomment the line below.
+// import "./user_socket.js"
 
-// webpack automatically bundles all modules in your
-// entry points. Those entry points can be configured
-// in "webpack.config.js".
+// You can include dependencies in two ways.
 //
-// Import dependencies
+// The simplest option is to put them in assets/vendor and
+// import them using relative paths:
 //
-import 'phoenix_html';
-
-// Import local files
+//     import "../vendor/some-package.js"
 //
-// Local files can be imported directly using relative paths, for example:
-// import socket from "./socket"
-import '@shopify/app-bridge';
-import React from 'react';
-import ReactDom from 'react-dom';
+// Alternatively, you can `npm install some-package --prefix assets` and import
+// them using a path starting with the package name:
+//
+//     import "some-package"
+//
 
-import Main from './main';
+// Include phoenix_html to handle method=PUT/DELETE in forms and buttons.
+import "phoenix_html"
+// Establish Phoenix Socket and LiveView configuration.
+import {Socket} from "phoenix"
+import {LiveSocket} from "phoenix_live_view"
+import topbar from "../vendor/topbar"
 
-ReactDom.render(
-  <Main name="your new App" />,
-  document.querySelector('main'),
-);
+let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
+let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}})
+
+// Show progress bar on live navigation and form submits
+topbar.config({barColors: {0: "#29d"}, shadowColor: "rgba(0, 0, 0, .3)"})
+window.addEventListener("phx:page-loading-start", info => topbar.show())
+window.addEventListener("phx:page-loading-stop", info => topbar.hide())
+
+// connect if there are any LiveViews on the page
+liveSocket.connect()
+
+// expose liveSocket on window for web console debug logs and latency simulation:
+// >> liveSocket.enableDebug()
+// >> liveSocket.enableLatencySim(1000)  // enabled for duration of browser session
+// >> liveSocket.disableLatencySim()
+window.liveSocket = liveSocket
+

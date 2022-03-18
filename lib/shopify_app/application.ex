@@ -5,17 +5,20 @@ defmodule ShopifyApp.Application do
 
   use Application
 
+  @impl true
   def start(_type, _args) do
-    # List all child processes to be supervised
     children = [
-      {Phoenix.PubSub, [name: ShopifyApp.PubSub, adapter: Phoenix.PubSub.PG2]},
       # Start the Ecto repository
       ShopifyApp.Repo,
-      # Start the endpoint when the application starts
+      # Start the Telemetry supervisor
+      ShopifyAppWeb.Telemetry,
+      # Start the PubSub system
+      {Phoenix.PubSub, name: ShopifyApp.PubSub},
+      # Start the Endpoint (http/https)
       ShopifyAppWeb.Endpoint,
       ShopifyAPI.Supervisor
-      # Starts a worker by calling: ShopifyApp.Worker.start_link(arg)
-      # {ShopifyApp.Worker, arg},
+      # Start a worker by calling: ShopifyApp.Worker.start_link(arg)
+      # {ShopifyApp.Worker, arg}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
@@ -26,6 +29,7 @@ defmodule ShopifyApp.Application do
 
   # Tell Phoenix to update the endpoint configuration
   # whenever the application is updated.
+  @impl true
   def config_change(changed, _new, removed) do
     ShopifyAppWeb.Endpoint.config_change(changed, removed)
     :ok

@@ -1,4 +1,4 @@
-use Mix.Config
+import Config
 
 # For production, don't forget to configure the url host
 # to something meaningful, Phoenix uses this information
@@ -10,18 +10,10 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :shopify_app, ShopifyAppWeb.Endpoint,
-  http: [:inet6, port: System.get_env("PORT") || 4000],
-  url: [host: "example.com", port: 80],
-  cache_static_manifest: "priv/static/cache_manifest.json",
-  secret_key_base: Map.fetch!(System.get_env(), "SECRET_KEY_BASE")
+  cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production
 config :logger, level: :info
-
-config :shopify_app, ShopifyApp.Repo,
-  url: System.get_env("DATABASE_URL"),
-  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
-  ssl: true
 
 # ## SSL Support
 #
@@ -29,10 +21,10 @@ config :shopify_app, ShopifyApp.Repo,
 # to the previous section and set your `:url` port to 443:
 #
 #     config :shopify_app, ShopifyAppWeb.Endpoint,
-#       ...
+#       ...,
 #       url: [host: "example.com", port: 443],
 #       https: [
-#         :inet6,
+#         ...,
 #         port: 443,
 #         cipher_suite: :strong,
 #         keyfile: System.get_env("SOME_APP_SSL_KEY_PATH"),
@@ -56,21 +48,3 @@ config :shopify_app, ShopifyApp.Repo,
 #       force_ssl: [hsts: true]
 #
 # Check `Plug.SSL` for all available options in `force_ssl`.
-
-# ## Using releases (distillery)
-#
-# If you are doing OTP releases, you need to instruct Phoenix
-# to start the server for all endpoints:
-#
-#     config :phoenix, :serve_endpoints, true
-#
-# Alternatively, you can configure exactly which server to
-# start per endpoint:
-#
-#     config :shopify_app, ShopifyAppWeb.Endpoint, server: true
-#
-# Note you can't rely on `System.get_env/1` when using releases.
-# See the releases documentation accordingly.
-
-# Finally import the config/prod.secret.exs which should be versioned
-# separately.

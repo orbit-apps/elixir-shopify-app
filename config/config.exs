@@ -1,11 +1,11 @@
 # This file is responsible for configuring your application
-# and its dependencies with the aid of the Mix.Config module.
+# and its dependencies with the aid of the Config module.
 #
 # This configuration file is loaded before any dependency and
 # is restricted to this project.
 
 # General application configuration
-use Mix.Config
+import Config
 
 config :shopify_app,
   ecto_repos: [ShopifyApp.Repo]
@@ -13,8 +13,19 @@ config :shopify_app,
 # Configures the endpoint
 config :shopify_app, ShopifyAppWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "BaCSN0TeeSORCKa4sfDKXFiA+x68+09JDKQKctDU7UFqDvg3uYS5WEYbyOPG5p28",
-  render_errors: [view: ShopifyAppWeb.ErrorView, accepts: ~w(html json)]
+  render_errors: [view: ShopifyAppWeb.ErrorView, accepts: ~w(html json), layout: false],
+  pubsub_server: ShopifyApp.PubSub,
+  live_view: [signing_salt: "aSWWRBUX"]
+
+# Configure esbuild (the version is required)
+config :esbuild,
+  version: "0.14.0",
+  default: [
+    args:
+      ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
+    cd: Path.expand("../assets", __DIR__),
+    env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
+  ]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -47,4 +58,4 @@ config :shopify_api, ShopifyAPI.Webhook, uri: System.get_env("WEBHOOK_URI")
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env()}.exs"
+import_config "#{config_env()}.exs"
