@@ -44,4 +44,4 @@ priv/plts/*.plt*
 # variables.
 /config/*.secret.exs
 
-.env
+.envrc.private

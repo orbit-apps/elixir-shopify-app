@@ -12,7 +12,7 @@ Everything you need to get [Elixir Shopify API](https://github.com/pixelunion/el
 1. Create the initial Git commit `git add -A`
 1. Create the initial Git commit `git commit -m "Initial commit"`
 1. Setup a Shopify App
-  - Add the API key and secret to your `.env`
+  - Add the API key and secret to your `.envrc.private`
   - Update the allowed URLs to include `https://public-facing-url.ngrok.com/shop/authorized/your_project_name`
 1. Start your database `docker-compose up -d`
 1. Fetch dependencies
