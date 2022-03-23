@@ -10,6 +10,11 @@ defmodule ShopifyAppWeb.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :shop_admin do
+    plug ShopifyAPI.Plugs.AdminAuthenticator
+    plug ShopifyApp.Plugs.PutShopifyContentHeaders
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -18,6 +23,13 @@ defmodule ShopifyAppWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+  end
+
+  scope "/shop_admin/:app", ShopifyAppWeb do
+    pipe_through :browser
+    pipe_through :shop_admin
+
+    get "/", ShopAdminController, :index
   end
 
   # Other scopes may use custom stacks.
