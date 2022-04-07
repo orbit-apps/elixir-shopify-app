@@ -38,7 +38,7 @@ defmodule ShopifyAppWeb.Router do
     pipe_through :browser
     pipe_through :shop_admin
 
-    # get "/", ShopAdminController, :index
+    get "/", ShopAdminController, :index
   end
 
   # Other scopes may use custom stacks.
