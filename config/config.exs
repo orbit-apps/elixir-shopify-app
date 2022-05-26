@@ -50,10 +50,7 @@ config :shopify_api, ShopifyAPI.ShopServer,
   initializer: {ShopifyApp.ShopifyAPI.Initializer, :shop_init, []},
   persistence: {ShopifyApp.ShopifyAPI.Initializer, :shop_persist, []}
 
-config :shopify_api,
-  webhook_filter: {ShopifyApp.WebhookFilter, :process, []},
-  json_library: Jason
-
+# Add this to your configuration so that ShopifyAPI knows the webhook prefix.
 config :shopify_api, ShopifyAPI.Webhook, uri: System.get_env("WEBHOOK_URI")
 
 # Import environment specific config. This must remain at the bottom

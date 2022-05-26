@@ -38,6 +38,12 @@ defmodule ShopifyAppWeb.Endpoint do
   plug Plug.RequestId
   plug Plug.Telemetry, event_prefix: [:phoenix, :endpoint]
 
+  # Shopify Webhook handler, needs to be before the Jason parser!
+  plug ShopifyAPI.Plugs.Webhook,
+    app_name: "shopify_app",
+    prefix: "/shopify/webhook",
+    callback: {ShopifyApp.WebhookHandler, :handle_webhook, []}
+
   plug Plug.Parsers,
     parsers: [:urlencoded, :multipart, :json],
     pass: ["*/*"],
