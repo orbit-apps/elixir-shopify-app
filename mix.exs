@@ -58,7 +58,7 @@ defmodule ShopifyApp.MixProject do
       {:postgrex, ">= 0.0.0"},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
-      {:shopify_api, github: "pixelunion-apps/elixir-shopifyapi", tag: "v0.13.1"}
+      {:shopify_api, github: "orbit-apps/elixir-shopifyapi", tag: "v0.13.1"}
     ]
   end
 
