@@ -44,6 +44,14 @@ defmodule ShopifyAppWeb.Endpoint do
     prefix: "/shopify/webhook",
     callback: {ShopifyApp.WebhookHandler, :handle_webhook, []}
 
+  if Mix.env() == :dev do
+    plug ShopifyApp.Plug.DevProxy, upstream: "http://localhost:3000"
+  end
+
+  plug ShopifyAdminProxy,
+    upstream: "https://example.myshopify.com/admin/api/2022-04/graphql.json",
+    mount_path: "/api/admin/shopify_graphql_proxy"
+
   plug Plug.Parsers,
     parsers: [:urlencoded, :multipart, :json],
     pass: ["*/*"],
