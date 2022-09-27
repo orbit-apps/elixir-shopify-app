@@ -1,6 +1,6 @@
 export WEBHOOK_URI=https://some.example.com/shop/example
 export API_KEY=""
 export API_SECRET=""
+export ADMIN_API_ENDPOINT=""
 
-source_env_if_exists .envrc.private
 # vi:syntax=bash

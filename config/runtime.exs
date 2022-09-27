@@ -12,7 +12,14 @@ if System.get_env("PHX_SERVER") && System.get_env("RELEASE_NAME") do
   config :shopify_app, ShopifyAppWeb.Endpoint, server: true
 end
 
+# Add this to your configuration so that ShopifyAPI knows the webhook prefix.
+config :shopify_api, ShopifyAPI.Webhook, uri: System.get_env("WEBHOOK_URI")
+
 if config_env() == :prod do
+  config :shopify_app, :shopify,
+    api_key: System.get_env("API_KEY") || raise("environment variable API_KEY is missing"),
+    admin_api_endpoint: System.get_env("ADMIN_API_ENDPOINT")
+
   database_url =
     System.get_env("DATABASE_URL") ||
       raise """
