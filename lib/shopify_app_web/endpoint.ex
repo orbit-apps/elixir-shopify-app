@@ -20,7 +20,7 @@ defmodule ShopifyAppWeb.Endpoint do
     at: "/",
     from: :shopify_app,
     gzip: false,
-    only: ~w(assets fonts images favicon.ico robots.txt)
+    only: ~w(assets fonts images favicon.ico robots.txt admin_ui)
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
@@ -43,6 +43,14 @@ defmodule ShopifyAppWeb.Endpoint do
     app_name: "shopify_app",
     prefix: "/shopify/webhook",
     callback: {ShopifyApp.WebhookHandler, :handle_webhook, []}
+
+  if Mix.env() == :dev do
+    plug ShopifyApp.Plug.DevProxy, upstream: "http://localhost:3000"
+  end
+
+  plug ShopifyAdminProxy,
+    upstream: "https://example.myshopify.com/admin/api/2022-04/graphql.json",
+    mount_path: "/api/admin/shopify_graphql_proxy"
 
   plug Plug.Parsers,
     parsers: [:urlencoded, :multipart, :json],

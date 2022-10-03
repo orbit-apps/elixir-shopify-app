@@ -80,3 +80,7 @@ config :shopify_app, ShopifyApp.Repo,
   database: "shopify_app_dev",
   hostname: "localhost",
   pool_size: 10
+
+config :shopify_app, :shopify,
+  api_key: System.get_env("API_KEY"),
+  admin_api_endpoint: System.get_env("ADMIN_API_ENDPOINT")
