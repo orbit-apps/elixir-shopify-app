@@ -58,7 +58,7 @@ defmodule ShopifyApp.MixProject do
       {:postgrex, ">= 0.0.0"},
       {:reverse_proxy_plug, "~> 2.1"},
       {:shopify_admin_proxy, github: "hez/elixir-shopify-admin-proxy", tag: "v0.1.2"},
-      {:shopify_api, github: "orbit-apps/elixir-shopifyapi", tag: "v0.13.6"},
+      {:shopify_api, github: "orbit-apps/elixir-shopifyapi", tag: "v0.13.7"},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"}
     ]
