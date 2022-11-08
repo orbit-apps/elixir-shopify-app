@@ -1,4 +1,4 @@
-defmodule ShopifyApp.Shop do
+defmodule ShopifyApp.Shops do
   @moduledoc false
   alias ShopifyApp.Repo
   alias ShopifyApp.Schema
@@ -12,8 +12,8 @@ defmodule ShopifyApp.Shop do
     |> Repo.insert_or_update()
   end
 
-  def find_or_new(%{domain: domain}) do
-    case Repo.get_by(Schema.Shop, domain: domain) do
+  def find_or_new(%{myshopify_domain: myshopify_domain}) do
+    case Repo.get_by(Schema.Shop, myshopify_domain: myshopify_domain) do
       nil -> %Schema.Shop{}
       shop -> shop
     end

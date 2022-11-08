@@ -3,11 +3,11 @@ defmodule ShopifyApp.Repo.Migrations.CreateShops do
 
   def change do
     create table(:shops) do
-      add :domain, :string
+      add :myshopify_domain, :string
 
       timestamps()
     end
 
-    create unique_index(:shops, [:domain])
+    create unique_index(:shops, [:myshopify_domain])
   end
 end

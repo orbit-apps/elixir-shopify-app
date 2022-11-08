@@ -4,7 +4,7 @@ defmodule ShopifyApp.Schema.Shop do
   import Ecto.Changeset
 
   schema "shops" do
-    field :domain, :string
+    field :myshopify_domain, :string
 
     timestamps()
   end
@@ -12,7 +12,7 @@ defmodule ShopifyApp.Schema.Shop do
   @doc false
   def changeset(shop, attrs) do
     shop
-    |> cast(attrs, [:domain])
-    |> validate_required([:domain])
+    |> cast(attrs, [:myshopify_domain])
+    |> validate_required([:myshopify_domain])
   end
 end

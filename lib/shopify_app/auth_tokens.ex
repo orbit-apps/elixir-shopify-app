@@ -1,4 +1,4 @@
-defmodule ShopifyApp.AuthToken do
+defmodule ShopifyApp.AuthTokens do
   @moduledoc false
   alias ShopifyApp.Repo
   alias ShopifyApp.Schema
