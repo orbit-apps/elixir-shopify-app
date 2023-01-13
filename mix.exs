@@ -12,11 +12,7 @@ defmodule ShopifyApp.MixProject do
       compilers: Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps(),
-      dialyzer: [
-        plt_add_apps: [:mix, :ex_unit],
-        plt_file: {:no_warn, "priv/plts/dialyzer.plt"}
-      ]
+      deps: deps()
     ]
   end
 
@@ -46,19 +42,23 @@ defmodule ShopifyApp.MixProject do
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       # eveyrthing else
       {:ecto_sql, "~> 3.6"},
-      {:esbuild, "~> 0.3", runtime: Mix.env() == :dev},
-      {:gettext, "~> 0.18"},
+      {:esbuild, "~> 0.5", runtime: Mix.env() == :dev},
+      {:finch, "~> 0.13"},
+      {:gettext, "~> 0.20"},
+      {:heroicons, "~> 0.5"},
       {:jason, "~> 1.2"},
-      {:phoenix, "~> 1.6.6"},
+      {:phoenix, "~> 1.7.0-rc.2", override: true},
       {:phoenix_ecto, "~> 4.4"},
       {:phoenix_html, "~> 3.0"},
-      {:phoenix_live_dashboard, "~> 0.7"},
-      {:phoenix_live_view, "~> 0.18.0"},
+      {:phoenix_live_dashboard, "~> 0.7.2"},
+      {:phoenix_live_view, "~> 0.18.3"},
       {:plug_cowboy, "~> 2.5"},
       {:postgrex, ">= 0.0.0"},
       {:reverse_proxy_plug, "~> 2.1"},
       {:shopify_admin_proxy, github: "hez/elixir-shopify-admin-proxy", tag: "v0.1.3"},
       {:shopify_api, github: "orbit-apps/elixir-shopifyapi", tag: "v0.13.7"},
+      {:swoosh, "~> 1.3"},
+      {:tailwind, "~> 0.1.8", runtime: Mix.env() == :dev},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"}
     ]
@@ -72,11 +72,12 @@ defmodule ShopifyApp.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      setup: ["deps.get", "ecto.setup"],
+      setup: ["deps.get", "ecto.setup", "assets.setup"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
-      "assets.deploy": ["esbuild default --minify", "phx.digest"]
+      "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
+      "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"]
     ]
   end
 end
