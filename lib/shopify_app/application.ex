@@ -8,12 +8,14 @@ defmodule ShopifyApp.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      # Start the Ecto repository
-      ShopifyApp.Repo,
       # Start the Telemetry supervisor
       ShopifyAppWeb.Telemetry,
+      # Start the Ecto repository
+      ShopifyApp.Repo,
       # Start the PubSub system
       {Phoenix.PubSub, name: ShopifyApp.PubSub},
+      # Start Finch
+      {Finch, name: ShopifyApp.Finch},
       # Start the Endpoint (http/https)
       ShopifyAppWeb.Endpoint,
       ShopifyAPI.Supervisor

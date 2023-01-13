@@ -15,7 +15,6 @@ defmodule ShopifyApp.DataCase do
   """
 
   use ExUnit.CaseTemplate
-  alias Ecto.Adapters.SQL
 
   using do
     quote do
@@ -29,9 +28,16 @@ defmodule ShopifyApp.DataCase do
   end
 
   setup tags do
-    pid = SQL.Sandbox.start_owner!(ShopifyApp.Repo, shared: not tags[:async])
-    on_exit(fn -> SQL.Sandbox.stop_owner(pid) end)
+    ShopifyApp.DataCase.setup_sandbox(tags)
     :ok
+  end
+
+  @doc """
+  Sets up the sandbox based on the test tags.
+  """
+  def setup_sandbox(tags) do
+    pid = Ecto.Adapters.SQL.Sandbox.start_owner!(ShopifyApp.Repo, shared: not tags[:async])
+    on_exit(fn -> Ecto.Adapters.SQL.Sandbox.stop_owner(pid) end)
   end
 
   @doc """

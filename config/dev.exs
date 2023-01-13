@@ -6,6 +6,7 @@ config :shopify_app, ShopifyApp.Repo,
   password: "postgres",
   hostname: "localhost",
   database: "shopify_app_dev",
+  stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
@@ -22,10 +23,10 @@ config :shopify_app, ShopifyAppWeb.Endpoint,
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
-  secret_key_base: "0xLJJ0mcgdVoiJdi2Vra9vS40+xLWy/ntpb6iKFewbqTjUiWiLIH9DgWxCj8+xD2",
+  secret_key_base: "AKZhpmq4Y/pC41oalKuYZPceJTzb7uMYv4itlofdbLIiDYPmYSnoUBkSbA4wnpVo",
   watchers: [
-    # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
+    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
   ]
 
 # ## SSL Support
@@ -36,7 +37,6 @@ config :shopify_app, ShopifyAppWeb.Endpoint,
 #
 #     mix phx.gen.cert
 #
-# Note that this task requires Erlang/OTP 20 or later.
 # Run `mix help phx.gen.cert` for more information.
 #
 # The `http:` config above can be replaced with:
@@ -58,10 +58,12 @@ config :shopify_app, ShopifyAppWeb.Endpoint,
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/shopify_app_web/(live|views)/.*(ex)$",
-      ~r"lib/shopify_app_web/templates/.*(eex)$"
+      ~r"lib/shopify_app_web/(controllers|live|components)/.*(ex|heex)$"
     ]
   ]
+
+# Enable dev routes for dashboard and mailbox
+config :shopify_app, dev_routes: true
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
@@ -73,14 +75,5 @@ config :phoenix, :stacktrace_depth, 20
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
 
-# Configure your database
-config :shopify_app, ShopifyApp.Repo,
-  username: "postgres",
-  password: "postgres",
-  database: "shopify_app_dev",
-  hostname: "localhost",
-  pool_size: 10
-
-config :shopify_app, :shopify,
-  api_key: System.get_env("API_KEY"),
-  admin_api_endpoint: System.get_env("ADMIN_API_ENDPOINT")
+# Disable swoosh api client as it is only required for production adapters.
+config :swoosh, :api_client, false

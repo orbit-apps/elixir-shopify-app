@@ -7,7 +7,8 @@ defmodule ShopifyAppWeb.Endpoint do
   @session_options [
     store: :cookie,
     key: "_shopify_app_key",
-    signing_salt: "AMFHRRoc"
+    signing_salt: "ijq1g2Yt",
+    same_site: "Lax"
   ]
 
   socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
@@ -20,7 +21,7 @@ defmodule ShopifyAppWeb.Endpoint do
     at: "/",
     from: :shopify_app,
     gzip: false,
-    only: ~w(assets fonts images favicon.ico robots.txt admin_ui)
+    only: ShopifyAppWeb.static_paths()
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
