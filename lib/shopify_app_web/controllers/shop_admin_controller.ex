@@ -1,16 +1,10 @@
 defmodule ShopifyAppWeb.ShopAdminController do
   use ShopifyAppWeb, :controller
 
-  require Logger
-
-  def index(conn, params) do
-    Logger.debug(inspect(params))
-    Logger.debug(inspect(conn.req_headers))
-    Logger.debug(inspect(conn.assigns))
-
+  def index(conn, _params) do
     conn
     |> put_root_layout(false)
-    |> render("index.html",
+    |> render(:index,
       config_attrs: %{
         "data-api-key" => config(:api_key),
         "data-admin-api-endpoint" => config(:admin_api_endpoint)
