@@ -22,7 +22,14 @@
         # In the latter case `**/*.{ex,exs}` will be used.
         #
         included: ["lib/", "src/", "test/", "web/", "apps/"],
-        excluded: [~r"/_build/", ~r"/deps/", ~r"/node_modules/"]
+        excluded: [
+          ~r"/_build/",
+          ~r"/deps/",
+          ~r"/node_modules/",
+          # Lets not fix the boiler plate phx files
+          "lib/shopify_app_web/components/core_components.ex",
+          "test/support/data_case.ex"
+        ]
       },
       #
       # Load and configure plugins here:
