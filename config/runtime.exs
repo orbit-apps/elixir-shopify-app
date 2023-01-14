@@ -23,11 +23,16 @@ end
 # Add this to your configuration so that ShopifyAPI knows the webhook prefix.
 config :shopify_api, ShopifyAPI.Webhook, uri: System.get_env("WEBHOOK_URI")
 
-if config_env() == :prod do
+unless config_env() == :test do
   config :shopify_app, :shopify,
     api_key: System.get_env("API_KEY") || raise("environment variable API_KEY is missing"),
+    api_secret:
+      System.get_env("API_SECRET") || raise("environment variable API_SECRET is missing"),
+    auth_redirect_uri: System.get_env("AUTH_REDIRECT_URI"),
     admin_api_endpoint: System.get_env("ADMIN_API_ENDPOINT")
+end
 
+if config_env() == :prod do
   database_url =
     System.get_env("DATABASE_URL") ||
       raise """

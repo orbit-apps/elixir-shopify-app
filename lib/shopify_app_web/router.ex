@@ -34,6 +34,14 @@ defmodule ShopifyAppWeb.Router do
     forward("/", Router)
   end
 
+  scope "/api" do
+    scope "/admin" do
+      pipe_through :shop_admin_api
+
+      forward "/", ShopifyApp.Plug.AdminAbsintheWrapper, schema: ShopifyAppGraphQL.AdminSchema
+    end
+  end
+
   scope "/shop_admin/:app", ShopifyAppWeb do
     pipe_through :browser
     pipe_through :shop_admin
