@@ -36,6 +36,7 @@ defmodule ShopifyApp.MixProject do
   defp deps do
     [
       # dev
+      {:bypass, "~> 2.1", only: :test},
       {:credo, "~> 1.6.4", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.2.0", only: [:dev, :test], runtime: false},
       {:floki, ">= 0.30.0", only: :test},

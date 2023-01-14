@@ -15,17 +15,20 @@ defmodule ShopifyApp.ShopTestSetup do
     ]
   end
 
+  def shopifyapi_bypass(_context) do
+    bypass = Bypass.open()
+
+    [bypass: bypass, myshopify_domain: "localhost:#{bypass.port}"]
+  end
+
   def shop(context) do
-    shop =
-      case Map.get(context, :myshopify_domain) do
-        nil -> insert(:shop)
-        domain -> insert(:shop, myshopify_domain: domain)
-      end
+    myshopify_domain = Map.get(context, :myshopify_domain, myshopify_domain())
+    shop = insert(:shop, myshopify_domain: myshopify_domain)
 
     shopifyapi_shop = %ShopifyAPI.Shop{domain: shop.myshopify_domain}
     ShopifyAPI.ShopServer.set(shopifyapi_shop, false)
 
-    [shop: shop, shopifyapi_shop: shopifyapi_shop]
+    [shop: shop, shopifyapi_shop: shopifyapi_shop, myshopify_domain: myshopify_domain]
   end
 
   def app(_context) do
