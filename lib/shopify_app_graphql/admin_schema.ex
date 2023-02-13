@@ -7,7 +7,4 @@ defmodule ShopifyAppGraphQL.AdminSchema do
   query do
     import_fields(:shop_admin_queries)
   end
-
-  mutation do
-  end
 end
