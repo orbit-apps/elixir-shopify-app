@@ -3,7 +3,7 @@ defmodule ShopifyAppWeb.ShopAdminController do
 
   def index(conn, _params) do
     conn
-    |> put_root_layout(false)
+    |> put_root_layout(html: false)
     |> render(:index,
       config_attrs: %{
         "data-api-key" => config(:api_key),
