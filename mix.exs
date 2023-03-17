@@ -64,7 +64,7 @@ defmodule ShopifyApp.MixProject do
       {:shopify_admin_proxy, github: "hez/elixir-shopify-admin-proxy", tag: "v0.1.3"},
       {:shopify_api, github: "orbit-apps/elixir-shopifyapi", tag: "v0.13.7"},
       {:swoosh, "~> 1.3"},
-      {:tailwind, "~> 0.1.8", runtime: Mix.env() == :dev},
+      {:tailwind, "~> 0.2.0", runtime: Mix.env() == :dev},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"}
     ]
