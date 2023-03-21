@@ -77,3 +77,8 @@ config :phoenix, :plug_init_mode, :runtime
 
 # Disable swoosh api client as it is only required for production adapters.
 config :swoosh, :api_client, false
+
+# Disable query compile time caching for dev
+config :shopify_admin_proxy, use_cached_queries: false
+
+config :reverse_proxy_plug, :http_client, ReverseProxyPlug.HTTPClient.Adapters.HTTPoison
