@@ -1,6 +1,7 @@
-export WEBHOOK_URI=https://some.example.com/shop/example
 export API_KEY=""
 export API_SECRET=""
-export ADMIN_API_ENDPOINT=""
+export NGROK_AUTH=""
+export NGROK_SUBDOMAIN=""
+export HOST=$NGROK_SUBDOMAIN.ngrok.io
 
 # vi:syntax=bash
