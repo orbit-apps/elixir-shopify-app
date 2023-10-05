@@ -20,11 +20,6 @@ jobs:
     env:
       MIX_ENV: test
 
-    strategy:
-      matrix:
-        otp: [25.2]
-        elixir: [1.14.2]
-
     steps:
       - uses: actions/checkout@v4
 
@@ -32,7 +27,7 @@ jobs:
         uses: actions/cache@v3.3.2
         with:
           path: priv/plts
-          key: ${{runner.os}}-${{matrix.otp}}-${{matrix.elixir}}-plts
+          key: ${{runner.os}}-${{hashFiles('**/.tool-versions')}}-plts
 
       - name: Setup elixir
         uses: erlef/setup-beam@v1
