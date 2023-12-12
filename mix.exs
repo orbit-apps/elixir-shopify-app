@@ -57,7 +57,7 @@ defmodule ShopifyApp.MixProject do
       {:heroicons, "~> 0.5"},
       {:jason, "~> 1.2"},
       {:jose, "~> 1.11.2"},
-      {:phoenix, "~> 1.7.0-rc.2", override: true},
+      {:phoenix, "~> 1.7.0"},
       {:phoenix_ecto, "~> 4.4"},
       {:phoenix_html, "~> 3.0"},
       {:phoenix_live_dashboard, "~> 0.8"},
