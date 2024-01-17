@@ -71,4 +71,9 @@ defmodule ShopifyAppWeb.Router do
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
   end
+
+  @spec webhooks_url() :: String.t()
+  def webhooks_url do
+    ShopifyAppWeb.Endpoint.struct_url() |> URI.append_path("/shopify/webhook") |> URI.to_string()
+  end
 end
