@@ -59,7 +59,7 @@ defmodule ShopifyApp.MixProject do
       {:jose, "~> 1.11.2"},
       {:phoenix, "~> 1.7.0"},
       {:phoenix_ecto, "~> 4.4"},
-      {:phoenix_html, "~> 3.0"},
+      {:phoenix_html, "~> 4.0"},
       {:phoenix_live_dashboard, "~> 0.8"},
       {:phoenix_live_view, "~> 0.20"},
       {:plug_cowboy, "~> 2.5"},
