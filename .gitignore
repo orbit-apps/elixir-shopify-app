@@ -31,6 +31,11 @@ shopify_app-*.tar
 # dialyzer files
 priv/plts/*.plt*
 
+# Dev tools
+.envrc.private
+.ngrok.yml
+.iex.private.exs
+
 # In case you use Node.js/npm, you want to ignore these.
 npm-debug.log
 /assets/node_modules/
