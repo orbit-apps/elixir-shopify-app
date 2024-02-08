@@ -3,6 +3,8 @@ defmodule ShopifyApp.Schema.Shop do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @type t :: %__MODULE__{}
+
   schema "shops" do
     field :myshopify_domain, :string
 

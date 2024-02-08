@@ -1,0 +1,18 @@
+mutation WebHookSubscriptionCreate($topic: WebhookSubscriptionTopic!, $callback_url: URL) {
+  webhookSubscriptionCreate(
+    topic: $topic
+    webhookSubscription: {
+      callbackUrl: $callback_url
+      format: JSON
+    }
+  ) {
+    userErrors {
+      field
+      message
+    }
+    webhookSubscription {
+      includeFields
+      topic
+    }
+  }
+}
