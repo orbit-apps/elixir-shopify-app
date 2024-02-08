@@ -1,0 +1,9 @@
+authtoken: <ngrok-auth-token>
+
+web_addr: 0.0.0.0:4040
+log: stdout
+tunnels:
+  elixir:
+    addr: host.docker.internal:4000
+    proto: http
+    subdomain: <elixir-subdomain>
