@@ -64,7 +64,7 @@ defmodule ShopifyApp.MixProject do
       {:phoenix_live_view, "~> 0.20"},
       {:plug_cowboy, "~> 2.5"},
       {:postgrex, ">= 0.0.0"},
-      {:reverse_proxy_plug, "~> 2.1"},
+      {:reverse_proxy_plug, "~> 3.0"},
       {:shopify_admin_proxy, github: "hez/elixir-shopify-admin-proxy", tag: "v0.3.3"},
       {:shopify_api, github: "orbit-apps/elixir-shopifyapi", tag: "v0.15.5"},
       {:swoosh, "~> 1.3"},
